@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>VidThon</title>
+    <!-- Latest compiled and minified CSS -->
+
+    {% load staticfiles %}
+   
+    <link rel='stylesheet' href="{% static 'css/homepage.css' %}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+</head>
+
+<body style='background-color:#212121;'>
+
+
+    <div class="navbar_top bg-red" style="background-color: #212121;">
+        <div class="navbar_top_left">
+
+            <ul class="Ythead logo">
+                <li><a href="/"><b>Vidthon</b></a></li>
+            </ul>
+
+        </div>
+        <div class="navbar_top_right">
+
+            {% if user.is_authenticated %}
+            <ul class="top_right_content">
+                <li><a href="/logout" class="button is-danger is-outlined is-small">Logout</a></li>
+            </ul>
+            {% if channel %}
+            <ul class="top_right_content">
+                <li><a class="{% if request.path == '/new_video' %} active {% endif %} upload" href="/new_video" class="">Upload</a>
+                </li>
+            </ul>
+            <ul class="top_right_content">
+                <li><a href="/{{ user }}/channel" class="welcome">Welcome {{ user }}</a></li>
+            </ul>
+            {% else %}
+            <ul class="top_right_content">
+                <li><a href="/createchannel">Create Channel</a></li>
+            </ul>
+            {% endif %}
+            {% else %}
+            <ul class="top_right_content">
+                <li><a class="{% if request.path == '/register' %} active {% endif %} button is-primary is-outlined is-small" href="/register">Sign Up</a></li>
+            </ul>
+            <ul class="top_right_content">
+                <li><a class="{% if request.path == '/login' %} active {% endif %} is-outlined is-small button is-info" href="/login">Sign In</a></li>
+            </ul>
+            {% endif %}
+        </div>
+
+    </div><hr>
+
+
+    <div class="navbar_left">
+        <div class="vertical-menu">
+            <a href="/">Home</a>
+            <a href="{% url 'trending' %}">Trending</a>
+            <a href="{% url 'channels_list' %}">Channels</a>
+            <div class="horizontal_line"></div>
+            <a href="{% url 'subscriptions' %}">Subscriptions</a>
+            <a href="{% url 'watch_history' %}">History</a>
+            <a href="{% url 'liked_videos' %}">Liked</a>
+            <div class="horizontal_line"></div>
+            <a href="{% url 'help' %}">About Us</a>
+            <a href="https://forms.gle/1ciZqqPGYwr14tX18">Feedback</a>
+        </div>
+    </div>
+
+    {% block body %}
+    {% endblock %}
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
